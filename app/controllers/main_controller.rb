@@ -1,4 +1,5 @@
 class MainController < ApplicationController
+  before_action :parse_params, only: :show
   def main
     
   end
@@ -14,10 +15,6 @@ class MainController < ApplicationController
       format.html
       format.json do 
         render json: {type: @current_answers.class.to_s, value:@current_answers}
-      end
-    
-      format.any do
-        render plain:'Unknown format'
       end
     
     end

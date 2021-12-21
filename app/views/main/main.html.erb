@@ -1,15 +1,13 @@
 <script>
     const url=location.protocol+'//'+location.host+'/view.json' //?value=
     function send_query() {
-        // info
-        console.log('send')
+        
         
         const xhr=new XMLHttpRequest()
         xhr.open('GET', url)
 
         xhr.onload = ()=> {
-            //info
-            console.log(xhr.response)
+            
             show_result(JSON.parse(xhr.response))
         }
         xhr.send()
@@ -17,16 +15,30 @@
     
     function show_result(data){
         const result = document.getElementById("result")   
-        //info
-        console.log(data)
+        result.innerHTML=""
         
         if (data.type == 'String') {
             result.innerHTML=""
-            //info
-            console.log('we have a problem script-show_result')
+            
+            
         }
         else {
             local_data=data.value
+            newRow = document.createElement('tr')
+            new_col_iteration = document.createElement('td')
+            new_col_factorial = document.createElement('td')
+            new_col_number_1 = document.createElement('td')
+            new_col_number_2 = document.createElement('td')
+            new_col_number_3 = document.createElement('td')
+
+            new_col_factorial.innerText='factorial'
+            new_col_iteration.innerText='iteration'
+            new_col_number_1.innerText='number1'
+            new_col_number_2.innerText='number2'
+            new_col_number_3.innerText='number3'
+
+            newRow.append(new_col_iteration,new_col_factorial,new_col_number_1,new_col_number_2,new_col_number_3)
+            result.append(newRow)
             for( let i=0; i<local_data.length; i+=3){
                 newRow = document.createElement('tr')
                 
@@ -42,7 +54,7 @@
                 new_col_number_2.innerText=local_data[i+2]
                 new_col_number_3.innerText=local_data[i+2]+1
 
-                newRow.append(new_col_factorial,new_col_iteration,new_col_number_1,new_col_number_2,new_col_number_3)
+                newRow.append(new_col_iteration,new_col_factorial,new_col_number_1,new_col_number_2,new_col_number_3)
                 result.append(newRow)
             }
         }
